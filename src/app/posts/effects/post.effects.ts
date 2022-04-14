@@ -9,12 +9,12 @@ import { loadPosts, loadPostsError, loadPostsSuccess } from "../actions";
 export class PostEffects {
   constructor(private actions$: Actions, private postService: PostService) {}
 
-  loadPosts$ = createEffect(() =>
+  getPosts$ = createEffect(() =>
     this.actions$.pipe(
       ofType(loadPosts),
       mergeMap(() =>
         this.postService.getPosts().pipe(
-          map((posts) => loadPostsSuccess({ posts: posts })),
+          map((postsResults) => loadPostsSuccess({ posts: postsResults })),
           catchError((error) => of(loadPostsError({ payload: error })))
         )
       )

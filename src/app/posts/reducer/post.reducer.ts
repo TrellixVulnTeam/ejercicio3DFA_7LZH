@@ -28,7 +28,7 @@ const _postReducer = createReducer(
     ...state,
     loading: false,
     loaded: true,
-    posts: posts,
+    posts: [...posts],
   })),
   on(loadPostsError, (state, { payload }) => ({
     ...state,
