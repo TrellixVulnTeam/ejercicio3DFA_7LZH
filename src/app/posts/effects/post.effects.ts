@@ -7,17 +7,20 @@ import { loadPosts, loadPostsError, loadPostsSuccess } from "../actions";
 
 @Injectable()
 export class PostEffects {
-  constructor(private actions$: Actions, private postService: PostService) {}
+  constructor(private actions$: Actions, private postService: PostService) { }
 
   getPosts$ = createEffect(() =>
     this.actions$.pipe(
       ofType(loadPosts),
       mergeMap(() =>
         this.postService.getPosts().pipe(
-          map((postsResults) => loadPostsSuccess({ posts: postsResults })),
+          map((posts) => loadPostsSuccess({ posts: posts })),
           catchError((error) => of(loadPostsError({ payload: error })))
         )
+
+
       )
     )
+
   );
 }

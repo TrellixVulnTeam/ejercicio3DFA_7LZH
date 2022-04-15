@@ -11,7 +11,7 @@ export interface PostState {
 }
 
 export const initialState: PostState = {
-  posts: [],
+  posts: [new PostDTO("titulo prueba","descripcion prueba",0,0,new Date())],
   post: new PostDTO("", "", 0, 0, new Date()),
   loading: false,
   loaded: false,
@@ -20,11 +20,8 @@ export const initialState: PostState = {
 
 const _postReducer = createReducer(
   initialState,
-  on(loadPosts, (state) => ({
-    ...state,
-    loading: true,
-  })),
-  on(loadPostsSuccess, (state, { posts }) => ({
+  on(loadPosts, (state) => ({ ...state, loading: true })),
+  on(loadPostsSuccess, (state, {posts}) => ({
     ...state,
     loading: false,
     loaded: true,
@@ -34,10 +31,14 @@ const _postReducer = createReducer(
     ...state,
     loading: false,
     loaded: false,
-    error: payload,
-  }))
+    error: {
+      url: payload.url,
+      status: payload.status,
+      message: payload.message,
+    }
+  })),
 );
 
-export function postReducer(state: PostState | undefined, action: Action) {
+export function postReducer(state: PostState | undefined , action: Action) {
   return _postReducer(state, action);
 }

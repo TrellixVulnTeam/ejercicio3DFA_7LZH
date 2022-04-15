@@ -26,7 +26,7 @@ import { StoreDevtoolsModule } from "@ngrx/store-devtools";
 import { environment } from "src/environments/environment";
 import { appReducers } from "./app.reducer";
 import { EffectsModule } from "@ngrx/effects";
-import { EffctsArray } from "./auth/effects";
+import { EffectsArray } from "./auth/effects";
 
 @NgModule({
   declarations: [
@@ -54,7 +54,7 @@ import { EffctsArray } from "./auth/effects";
     SharedModule,
     //StoreModule.forRoot({ categories: categoryReducer }),
     StoreModule.forRoot(appReducers),
-    EffectsModule.forRoot(EffctsArray),
+    EffectsModule.forRoot(EffectsArray),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
       logOnly: environment.production,

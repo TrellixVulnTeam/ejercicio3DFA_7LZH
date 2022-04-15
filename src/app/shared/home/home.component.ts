@@ -39,16 +39,17 @@ export class HomeComponent {
         }
       }
     ); */
+    this.store.select("postsApp").subscribe((posts)=>{this.posts = posts.posts})
     this.store.dispatch(loadPosts());
     //TODO<-----Falta comprobar la variable userid
-    this.store.select("auth").subscribe((authResponse)=>{
+    /* this.store.select("auth").subscribe((authResponse)=>{
       const userId = authResponse.credentials.user_id;
       console.log("UserId: " + userId);
     });
 
     this.store.select("posts").subscribe((postsResponse) => {
       this.posts = postsResponse.posts;
-    });
+    }); */
     
   }
   /* private loadPosts() {
